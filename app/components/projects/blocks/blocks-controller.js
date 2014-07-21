@@ -195,7 +195,7 @@ appContainer.
             };
         };
 
-        $('div.control button').on('click', function(){
+        $('.blocks .control button').on('click', function(){
             var cls = this.getAttribute('class'),
                 side = cls.replace('move-','');
             utils.showNew();

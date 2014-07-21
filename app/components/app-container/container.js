@@ -31,9 +31,14 @@ config(['$routeProvider', function($routeProvider) {
         controller: 'projects-controller'}
         );
 
-        $routeProvider.when('/projects/:progectId', {
+        $routeProvider.when('/projects/blocks', {
             templateUrl: 'components/projects/blocks/blocksContent.html', 
             controller: 'blocks-controller'}
+        );
+
+        $routeProvider.when('/projects/tetris', {
+            templateUrl: 'components/projects/tetris/tetrisContent.html', 
+            controller: 'tetris-controller'}
         );
 
     // otherwise({

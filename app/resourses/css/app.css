@@ -1,19 +1,15 @@
-/* app css stylesheet */
+ app css stylesheet */
+.navigation > .navbar{
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
 
 .navigation .navbar ul.navbar-nav{
 	float: right;
 }
 
 [app-container] {
-  border: 1px solid gray;
-  position: fixed;
   width: 100%;
-  min-height: 800px;
-}
-
-[ng-view] {
-	height: 100%;
-	border: 1px solid green;
 }
 
 .projects .thumbnail img{
@@ -27,10 +23,11 @@
 	padding: 0px;
 }
 
+/*==============================================================*/
+/*			start of styles for game "blocks"					*/
 .blocks .wrapper{
 	float:left;
-    height: 208px;
-    width: 208px;
+    width: 204px;
     border:1px solid red;
     font-size:0;
     padding: 3px;
@@ -42,6 +39,7 @@
     width: 50px;
     border:1px solid gray;
     display: inline-block;
+    margin: -1px 0 0 -1px;
 }
 .blocks .wrapper span,
 .blocks .wrapper div span{
@@ -52,34 +50,34 @@
     text-align: center;
 }
 
-.control{
-    padding-top:50px;
-    margin-left: 100px;    
-}
-
-.control .move-up{
-    margin-left: 50px;
-}
-
 .blocks .wrapper div span.moving{
     -webkit-animation: moving 2s; /* Chrome, Safari, Opera */
     animation: moving 2s;
 }
 
-/* Chrome, Safari, Opera */
-/*@-webkit-keyframes moving {
-    0%   {left:0px; top:0px;}
-    25%  {left:200px; top:0px;}
-    50%  {left:200px; top:200px;}
-    75%  {left:0px; top:200px;}
-    100% {left:50px; top:100px;}
-}*/
+.blocks .control{
+    padding-top:50px;
+    margin-left: 100px;    
+}
 
-/* Standard syntax */
-/*@keyframes moving {
-    0%   {left:0px; top:0px;}
-    25%  {left:200px; top:0px;}
-    50%  {left:200px; top:200px;}
-    75%  {left:0px; top:200px;}
-    100% {left:50px; top:100px;}
-}*/
+.blocks .control .move-up{
+    margin-left: 50px;
+}
+/*			end of styles for game "blocks"						*/
+/*==============================================================*/
+
+/*==============================================================*/
+/*			start of styles for game "tetris"					*/
+.tetris .wrapper{
+    border:1px solid red;
+}
+
+.tetris .control{
+    padding-top:50px;
+    margin-left: 100px;    
+}
+.tetris .control .move-up{
+    margin: 0 0 5px 50px;
+}
+/*			end of styles for game "tetris"						*/
+/*==============================================================*/
