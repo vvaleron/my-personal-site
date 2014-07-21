@@ -1,0 +1,3 @@
+function(){
+	consolelog('app-controller');
+}

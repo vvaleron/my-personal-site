@@ -1,0 +1,81 @@
+/* app css stylesheet */
+
+[app-container] {
+  border: 1px solid gray;
+  position: fixed;
+  width: 100%;
+  min-height: 800px;
+}
+
+[ng-view] {
+	height: 100%;
+	border: 1px solid green;
+}
+
+.projects .thumbnail img{
+	height: 300px;
+	width: 300px;
+	opacity: 0.9;
+}
+
+[ng-view].container,
+[ng-view] .blocks{
+	padding: 0px;
+}
+
+.blocks .wrapper{
+	float:left;
+    height: 208px;
+    width: 208px;
+    border:1px solid red;
+    font-size:0;
+    padding: 3px;
+    margin: 20px;
+}
+
+.blocks .wrapper div{
+    height: 50px;
+    width: 50px;
+    border:1px solid gray;
+    display: inline-block;
+}
+.blocks .wrapper span,
+.blocks .wrapper div span{
+	font-size: 16px;
+    padding: 14px 0;
+    position: absolute;
+    width: 50px;
+    text-align: center;
+}
+
+.control{
+    padding-top:50px;
+    margin-left: 100px;    
+}
+
+.control .move-up{
+    margin-left: 50px;
+}
+
+.blocks .wrapper div span.moving{
+    -webkit-animation: moving 2s; /* Chrome, Safari, Opera */
+    animation: moving 2s;
+}
+
+/* Chrome, Safari, Opera */
+/*@-webkit-keyframes moving {
+    0%   {left:0px; top:0px;}
+    25%  {left:200px; top:0px;}
+    50%  {left:200px; top:200px;}
+    75%  {left:0px; top:200px;}
+    100% {left:50px; top:100px;}
+}*/
+
+/* Standard syntax */
+/*@keyframes moving {
+    0%   {left:0px; top:0px;}
+    25%  {left:200px; top:0px;}
+    50%  {left:200px; top:200px;}
+    75%  {left:0px; top:200px;}
+    100% {left:50px; top:100px;}
+}*/
