@@ -1,5 +1,9 @@
 /* app css stylesheet */
 
+.navigation .navbar ul.navbar-nav{
+	float: right;
+}
+
 [app-container] {
   border: 1px solid gray;
   position: fixed;
