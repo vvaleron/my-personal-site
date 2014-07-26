@@ -1,8 +1,5 @@
 var appContainer = angular.module('container', [
-  'ngRoute',
-  // 'container-controller_test',
-//  'app.directives',
-  // 'app.controllers'
+  'ngRoute'
 ]).
 
 config(['$routeProvider', function($routeProvider) {
