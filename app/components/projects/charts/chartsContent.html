@@ -1,0 +1,19 @@
+<div class="charts container"> 
+	<canvas class='wrapper' width="200" height="300"></canvas>
+
+	<div class='control' style='display:inline-block;'>
+		<form name="myForm" class="my-form">
+
+		  Temperature: <input name="temperature" ng-model="temperature" required>
+		  <span class="error" ng-show="myForm.temperature.$error.required">Required!</span>
+
+		   Date: <input type="date" name="date" ng-model="date"
+		       placeholder="yyyy-MM-dd" min="2014-01-01" max="2014-12-31" required />
+		   <span class="error" ng-show="myForm.date.$error.required">Required!</span>
+
+		    Time: <input type="time" name="time" ng-model="time"
+			       placeholder="HH:mm" required />
+			<span class="error" ng-show="myForm.time.$error.required">Required!</span>
+		 </form>
+	</div>
+<div>

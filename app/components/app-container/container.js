@@ -36,9 +36,9 @@ config(['$routeProvider', function($routeProvider) {
             controller: 'blocks-controller'}
         );
 
-        $routeProvider.when('/projects/tetris', {
-            templateUrl: 'components/projects/tetris/tetrisContent.html', 
-            controller: 'tetris-controller'}
+        $routeProvider.when('/projects/charts', {
+            templateUrl: 'components/projects/charts/chartsContent.html', 
+            controller: 'charts-controller'}
         );
 
     // otherwise({
