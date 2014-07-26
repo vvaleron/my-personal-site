@@ -1,5 +1,5 @@
 var appContainer = angular.module('container', [
-  'ngRoute'
+  'ngRoute',
   // 'container-controller_test',
 //  'app.directives',
   // 'app.controllers'

@@ -69,11 +69,12 @@
 /*==============================================================*/
 /*			start of styles for "charts"						*/
 .charts .wrapper{
-    border:1px solid red;
+    /*border:1px solid red;*/
 }
 
 .charts .control{
-    padding-top:50px;
+	position: absolute;
+    padding-top: 100px;
     margin-left: 100px;    
 }
 
@@ -82,6 +83,7 @@
    transition:all linear 0.5s;
    background: transparent;
  }
+ 
 .charts .control .my-form .ng-invalid {
    background: red;
  }

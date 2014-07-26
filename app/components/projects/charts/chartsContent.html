@@ -1,19 +1,30 @@
 <div class="charts container"> 
-	<canvas class='wrapper' width="200" height="300"></canvas>
+	<canvas class='temperature-chart wrapper' width="500" height="500" ng-init="paint.chartInit(canvas)"></canvas>
 
 	<div class='control' style='display:inline-block;'>
-		<form name="myForm" class="my-form">
+		<form name="temperatureForm" ng-submit="submitTemperature()" class="my-form">
 
-		  Temperature: <input name="temperature" ng-model="temperature" required>
-		  <span class="error" ng-show="myForm.temperature.$error.required">Required!</span>
+		  Temperature: <input type="number" name="temperature" ng-model="formData.temperature"
+		  		min="0" max="999" required>
+		  <span class="error" ng-show="temperatureForm.temperature.$error.required">Required!</span>
 
-		   Date: <input type="date" name="date" ng-model="date"
-		       placeholder="yyyy-MM-dd" min="2014-01-01" max="2014-12-31" required />
-		   <span class="error" ng-show="myForm.date.$error.required">Required!</span>
+		   Date: <input type="date" name="date" ng-model="formData.date"
+		       placeholder="yyyy-MM-dd" temperatureForm="2014-01-01" max="2014-12-31" required />
+		   <span class="error" ng-show="temperatureForm.date.$error.required">Required!</span>
 
-		    Time: <input type="time" name="time" ng-model="time"
+		    Time: <input type="time" name="time" ng-model="formData.time"
 			       placeholder="HH:mm" required />
-			<span class="error" ng-show="myForm.time.$error.required">Required!</span>
-		 </form>
+			<span class="error" ng-show="temperatureForm.time.$error.required">Required!</span>
+
+			<input type="submit" value="Submit" />
+		 </form><br/>
+
+		 Time Zone:
+			<div class="time-zone btn-group">
+			  <button type="button" class="btn btn-default">Day</button>
+			  <button type="button" class="btn btn-default">Week</button>
+			  <button type="button" class="btn btn-default">Month</button>
+			  <button type="button" class="btn btn-default">Year</button>
+			</div>
 	</div>
 <div>
