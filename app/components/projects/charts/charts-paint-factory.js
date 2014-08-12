@@ -102,7 +102,22 @@ appContainer.
     };
 
     function repaintPoints(){
-    	console.log({points:this.chart.points, this: this}, 'repaintPoints()');
+      // Create mock points for dev
+      if (this.chart.points && this.chart.points.length < 10){
+        for (var i=0; i < 50; i++){
+         var point = {};
+          point.date = "" + Math.round(Math.random() * 2014) + '-' + Math.round(Math.random() * 12) + '-' + Math.round(Math.random() * 30);    
+          point.time = ""+ Math.round(Math.random() * 24) + ':'+ Math.round(Math.random() * 60);
+          point.temperatur = Math.round(Math.random() * 50);
+
+         this.chart.points.push(point);
+        }
+
+
+      
+      }
+
+    	console.log(this.chart.points, 'repaintPoints()');
     };
 
     function repaint(){
@@ -121,7 +136,7 @@ appContainer.
     		this.repaintPoints();
     	}
 
-    	debugger
+    	
     };
 
   	function applyMethods(el){
@@ -136,9 +151,9 @@ appContainer.
     	chartInit: chartInit,
     	repaint: repaint,
     	repaintPoints: repaintPoints,
-      	applyMethods : applyMethods,
-      	getPercent	: getPercent,
-        repaintBackground: repaintBackground,
-        repaintDivisions : repaintDivisions
+      applyMethods : applyMethods,
+      getPercent	: getPercent,
+      repaintBackground: repaintBackground,
+      repaintDivisions : repaintDivisions
     }
 });
