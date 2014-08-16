@@ -5,18 +5,20 @@ appContainer.
   		this.applyMethods(canvas);
 
   		canvas.chart = {
-          maxTemperature: 50
-      };
-      canvas.chart.size = {
-        	width: canvas.width,
-        	height: canvas.height,
-        	top: canvas.getPercent(10).height,
-        	bottom: canvas.height - canvas.getPercent(10).height,
-        	left: canvas.getPercent(10).width,
-        	right: canvas.width - canvas.getPercent(10).width,
+          timeZone: "Day",
+          maxTemperature: 50,
+          size: {
+          width: canvas.width,
+          height: canvas.height,
+          top: canvas.getPercent(10).height,
+          bottom: canvas.height - canvas.getPercent(10).height,
+          left: canvas.getPercent(10).width,
+          right: canvas.width - canvas.getPercent(10).width,
           verticalDivision: 30,
-        	horizontalDivision: 30
+          horizontalDivision: 30
+          }      
       };
+
       canvas.chart.getHourPxl = function() {
         var size = canvas.chart.size,
             width = size.width - size.left * 2;
