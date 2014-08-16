@@ -12,8 +12,30 @@ appContainer.
         	bottom: canvas.height - canvas.getPercent(10).height,
         	left: canvas.getPercent(10).width,
         	right: canvas.width - canvas.getPercent(10).width,
-        	verticalDivision: 30,
+          verticalDivision: 30,
         	horizontalDivision: 30
+        };
+        canvas.chart.getHourPxl = function() {
+          var size = canvas.chart.size,
+              width = size.width - size.left * 2;
+
+          return width/24;
+        };
+        canvas.chart.getTempPxl = function() {
+          var size = canvas.chart.size,
+              height = size.height - size.top * 2;
+
+          return height/50;
+        };
+        canvas.chart.getXPoint = function(hours, minutes) {
+          var chart = canvas.chart,
+              inHours = hours + minutes/60;
+
+              return inHours * chart.getHourPxl();
+
+        };
+        canvas.chart.getYPoint = function(temperature) {
+            return temperature * canvas.chart.getTempPxl();
         };
 
         canvas.repaintBackground();
@@ -101,23 +123,47 @@ appContainer.
 		canvas.repaintDivisions();
     };
 
-    function repaintPoints(){
+    function repaintPoints(){            
+      var canvas = this,
+          context = canvas.getContext('2d'),
+          top = canvas.chart.size.top,
+          bottom = canvas.chart.size.bottom,
+          left = canvas.chart.size.left,
+          right = canvas.chart.size.right;
+          points = canvas.chart.points;
+
       // Create mock points for dev
-      if (this.chart.points && this.chart.points.length < 10){
-        for (var i=0; i < 50; i++){
+      if (points && points.length < 10){
+        for (var i=0; i < 1000; i++){
          var point = {};
           point.date = "" + Math.round(Math.random() * 2014) + '-' + Math.round(Math.random() * 12) + '-' + Math.round(Math.random() * 30);    
           point.time = ""+ Math.round(Math.random() * 24) + ':'+ Math.round(Math.random() * 60);
-          point.temperatur = Math.round(Math.random() * 50);
+          point.temperature = Math.round(Math.random() * 50);
 
-         this.chart.points.push(point);
-        }
-
-
-      
+         points.push(point);
+        } 
       }
+      //
+      points.forEach(function(point, index, points){
+          
+          var hours = +point.time.split(':')[0],
+              minutes = +point.time.split(':')[1],
+              temperature = point.temperature;
 
-    	console.log(this.chart.points, 'repaintPoints()');
+          var x = this.chart.getXPoint(hours,minutes) + this.chart.size.left,
+              y = this.chart.getYPoint(temperature) + this.chart.size.top;
+
+
+
+          context.beginPath();
+          context.moveTo(x, y);
+          context.lineTo(x + 1, y + 1);
+          context.stroke();
+      }, canvas);
+
+
+
+    	console.log(points, 'repaintPoints()');
     };
 
     function repaint(){
