@@ -4,8 +4,10 @@ appContainer.
   	function chartInit(canvas){
   		this.applyMethods(canvas);
 
-  		canvas.chart = {};
-        canvas.chart.size = {
+  		canvas.chart = {
+          maxTemperature: 50
+      };
+      canvas.chart.size = {
         	width: canvas.width,
         	height: canvas.height,
         	top: canvas.getPercent(10).height,
@@ -14,31 +16,30 @@ appContainer.
         	right: canvas.width - canvas.getPercent(10).width,
           verticalDivision: 30,
         	horizontalDivision: 30
-        };
-        canvas.chart.getHourPxl = function() {
-          var size = canvas.chart.size,
-              width = size.width - size.left * 2;
+      };
+      canvas.chart.getHourPxl = function() {
+        var size = canvas.chart.size,
+            width = size.width - size.left * 2;
 
-          return width/24;
-        };
-        canvas.chart.getTempPxl = function() {
-          var size = canvas.chart.size,
-              height = size.height - size.top * 2;
+        return width/24;
+      };
+      canvas.chart.getTempPxl = function() {
+        var size = canvas.chart.size,
+            height = size.height - size.top * 2;
 
-          return height/50;
-        };
-        canvas.chart.getXPoint = function(hours, minutes) {
-          var chart = canvas.chart,
-              inHours = hours + minutes/60;
+        return height/50;
+      };
+      canvas.chart.getXPoint = function(hours, minutes) {
+        var chart = canvas.chart,
+            inHours = hours + minutes/60;
 
-              return inHours * chart.getHourPxl();
+            return inHours * chart.getHourPxl();
+      };
+      canvas.chart.getYPoint = function(temperature) {
+          return temperature * canvas.chart.getTempPxl();
+      };
 
-        };
-        canvas.chart.getYPoint = function(temperature) {
-            return temperature * canvas.chart.getTempPxl();
-        };
-
-        canvas.repaintBackground();
+      canvas.repaintBackground();
   	};
 
   	function getPercent(percent){
@@ -52,56 +53,98 @@ appContainer.
 
   	function repaintDivisions(){
   		var context = this.getContext('2d'),
-  			size = this.chart.size;
+  			size = this.chart.size,
+        timeZone = this.chart.timeZone,
+        divisionInHours = 2,
+        divisionInCelsius = 5,
+        horizontalDivisionsCount,
+        horizontalDivisionInPixel,
+        verticalDivisionsCount,
+        verticalDivisionInPixel;
 
-  		//vertical divisions
-        for (i=0; i < (size.bottom - size.top) / size.verticalDivision; i++){
-        	var currentY = size.bottom - (size.verticalDivision * i);
-        	context.beginPath();
-        	context.moveTo(size.left - 2, currentY);
-        	context.lineTo(size.left + 2, currentY);
-        	context.stroke();
-        }
+      if (timeZone == "Day") {
+          horizontalDivisionsCount = 24 / divisionInHours;
+          horizontalDivisionInPixel = (size.width - size.left - 50) / horizontalDivisionsCount;
+      }
+
+      verticalDivisionsCount = this.chart.maxTemperature / divisionInCelsius;
+      verticalDivisionInPixel = (size.height - size.top - 50) / verticalDivisionsCount;
+
+      size.horizontalDivision = horizontalDivisionInPixel;
+      size.verticalDivision = verticalDivisionInPixel;
 
         //horizontal divisions
-        for (i=0; i < (size.right - size.left) / size.horizontalDivision; i++){
+        var currentHorizontalDivision = 0;
+        for (i=0; i <= horizontalDivisionsCount; i++){
         	var currentX = size.left + (size.horizontalDivision * i);
         	context.beginPath();
         	context.moveTo(currentX, size.bottom + 2);
         	context.lineTo(currentX, size.bottom - 2);
         	context.stroke();
+
+          //horizontal text
+          if (currentHorizontalDivision) {
+            context.fillStyle = "black";
+            context.font = "10pt Helvetica";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillText(currentHorizontalDivision * divisionInHours, currentX , size.bottom + 20);
+          }
+          ++currentHorizontalDivision;
+        }
+
+        //vertical divisions
+        var currentVerticalDivision = 0;
+        for (i=0; i <= verticalDivisionsCount; i++){
+          var currentY = size.bottom - (size.verticalDivision * i);
+          context.beginPath();
+          context.moveTo(size.left - 2, currentY);
+          context.lineTo(size.left + 2, currentY);
+          context.stroke();
+
+          //vertical text
+          if (currentVerticalDivision) {
+            context.fillStyle = "black";
+            context.font = "10pt Helvetica";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillText(currentVerticalDivision * divisionInCelsius, size.left - 10, currentY);
+          }
+          ++currentVerticalDivision;
         }
   	};
 
     function repaintBackground(){
         var canvas = this,
         	context = canvas.getContext('2d'),
-        	top = canvas.chart.size.top,
-        	bottom = canvas.chart.size.bottom,
-        	left = canvas.chart.size.left,
-        	right = canvas.chart.size.right;
+          size = canvas.chart.size,
+          width = size.width,
+        	top = size.top,
+        	bottom = size.bottom,
+        	left = size.left,
+        	right = size.right;
 
         //vertical and horizontal lines
         context.beginPath();
-        context.moveTo(left, top);
+        context.moveTo(left, 0);
         context.lineTo(left, bottom);
-        context.lineTo(right, bottom);
+        context.lineTo(width, bottom);
         context.stroke();
         
         //arrow for vertical line
         context.beginPath();
-        context.moveTo(left, top);
-        context.lineTo(left-5, top+20);
-        context.lineTo(left+5, top+20);
-        context.lineTo(left, top);
+        context.moveTo(left, 0);
+        context.lineTo(left-5, 20);
+        context.lineTo(left+5, 20);
+        context.lineTo(left, 0);
         context.fill();
         
         //arrow for horizontal line
         context.beginPath();
-        context.moveTo(right, bottom);
-        context.lineTo(right-20, bottom-5);
-        context.lineTo(right-20, bottom+5);
-        context.lineTo(right, bottom);
+        context.moveTo(width, bottom);
+        context.lineTo(width-20, bottom-5);
+        context.lineTo(width-20, bottom+5);
+        context.lineTo(width, bottom);
         context.fill();
 
         //horizontal text
@@ -109,18 +152,18 @@ appContainer.
         context.font = "18pt Helvetica";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.fillText("Time", right / 2 ,canvas.height - 20);
+        context.fillText("Time", width / 2 ,canvas.height - 10);
 
 
         //vertical text
         context.save();
-		context.translate(20, bottom / 2);
-		context.rotate(-0.5*Math.PI);
+    		context.translate(20, bottom / 2);
+    		context.rotate(-0.5*Math.PI);
 
-		context.fillText("Temperature" , 0, 0);
-		context.restore();
+    		context.fillText("Temperature" , 0, 0);
+    		context.restore();
 
-		canvas.repaintDivisions();
+    		canvas.repaintDivisions();
     };
 
     function repaintPoints(){            
@@ -134,26 +177,32 @@ appContainer.
 
       // Create mock points for dev
       if (points && points.length < 10){
-        for (var i=0; i < 1000; i++){
-         var point = {};
+        var hours = 1,
+            temperature = 1;
+
+        for (var i=0; i < 24; i++){
+         var point = {},
+             hours = Math.round(hours),
+             minutes = hours != 24 ? Math.round(Math.random() * 60) : "00";
+
           point.date = "" + Math.round(Math.random() * 2014) + '-' + Math.round(Math.random() * 12) + '-' + Math.round(Math.random() * 30);    
-          point.time = ""+ Math.round(Math.random() * 24) + ':'+ Math.round(Math.random() * 60);
-          point.temperature = Math.round(Math.random() * 50);
+          point.time = ""+ hours + ':'+ minutes;
+          point.temperature = Math.round(temperature);
 
          points.push(point);
+
+         hours != 24 ? ++hours : hours = 1;
+         temperature != 50 ? ++temperature : temperature = 1;
         } 
       }
       //
-      points.forEach(function(point, index, points){
-          
+      points.forEach(function(point, index, points){          
           var hours = +point.time.split(':')[0],
               minutes = +point.time.split(':')[1],
               temperature = point.temperature;
 
           var x = this.chart.getXPoint(hours,minutes) + this.chart.size.left,
-              y = this.chart.getYPoint(temperature) + this.chart.size.top;
-
-
+              y = this.chart.size.bottom - this.chart.getYPoint(temperature);
 
           context.beginPath();
           context.moveTo(x, y);
