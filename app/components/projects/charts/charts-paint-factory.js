@@ -8,14 +8,14 @@ appContainer.
           timeZone: "Day",
           maxTemperature: 50,
           size: {
-          width: canvas.width,
-          height: canvas.height,
-          top: canvas.getPercent(10).height,
-          bottom: canvas.height - canvas.getPercent(10).height,
-          left: canvas.getPercent(10).width,
-          right: canvas.width - canvas.getPercent(10).width,
-          verticalDivision: 30,
-          horizontalDivision: 30
+            width: canvas.width,
+            height: canvas.height,
+            top: canvas.getPercent(10).height,
+            bottom: canvas.height - canvas.getPercent(10).height,
+            left: canvas.getPercent(10).width,
+            right: canvas.width - canvas.getPercent(10).width,
+            verticalDivision: 30,
+            horizontalDivision: 30
           }      
       };
 
@@ -178,11 +178,6 @@ appContainer.
           points = canvas.chart.points;
 
       // Create mock points for dev
-<<<<<<< HEAD
-      if (points && points.length < 10) {
-        for (var i=0; i < 50; i++) {
-         var point = {};
-=======
       if (points && points.length < 10){
         var hours = 1,
             temperature = 1;
@@ -191,8 +186,7 @@ appContainer.
          var point = {},
              hours = Math.round(hours),
              minutes = hours != 24 ? Math.round(Math.random() * 60) : "00";
-
->>>>>>> 799034f3d87d35dcc2e888faf1c2c518214b3ff1
+          
           point.date = "" + Math.round(Math.random() * 2014) + '-' + Math.round(Math.random() * 12) + '-' + Math.round(Math.random() * 30);    
           point.time = ""+ hours + ':'+ minutes;
           point.temperature = Math.round(temperature);
@@ -217,8 +211,6 @@ appContainer.
           context.lineTo(x + 1, y + 1);
           context.stroke();
       }, canvas);
-
-
 
     	console.log(points, 'repaintPoints()');
     };
