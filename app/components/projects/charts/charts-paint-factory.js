@@ -16,6 +16,36 @@ appContainer.
             right: canvas.width - canvas.getPercent(10).width,
             verticalDivision: 30,
             horizontalDivision: 30
+          },
+          processTimeZone: function(){
+          var timeFormat;
+            switch(this.timeZone) {
+                case "Day":
+                    timeFormat = {
+                      format: 24,
+                      divisionsValue: 2
+                    };
+                    break;
+                case "Week":
+                    timeFormat = {
+                      format: 7,
+                      divisionsValue: 1
+                    };
+                    break;
+                case "Month":
+                    timeFormat = {
+                      format: 4,
+                      divisionsValue: 1
+                    };
+                    break;
+                case "Year":
+                    timeFormat = {
+                      format: 12,
+                      divisionsValue: 1
+                    };
+                    break;
+            };
+            return timeFormat;
           }      
       };
 
@@ -56,18 +86,15 @@ appContainer.
   	function repaintDivisions(){
   		var context = this.getContext('2d'),
   			size = this.chart.size,
-        timeZone = this.chart.timeZone,
-        divisionInHours = 2,
         divisionInCelsius = 5,
+        timeFormat = this.chart.processTimeZone(),
         horizontalDivisionsCount,
         horizontalDivisionInPixel,
         verticalDivisionsCount,
         verticalDivisionInPixel;
-
-      if (timeZone == "Day") {
-          horizontalDivisionsCount = 24 / divisionInHours;
-          horizontalDivisionInPixel = (size.width - size.left - 50) / horizontalDivisionsCount;
-      }
+      
+      horizontalDivisionsCount = timeFormat.format / timeFormat.divisionsValue;
+      horizontalDivisionInPixel = (size.width - size.left - 50) / horizontalDivisionsCount;
 
       verticalDivisionsCount = this.chart.maxTemperature / divisionInCelsius;
       verticalDivisionInPixel = (size.height - size.top - 50) / verticalDivisionsCount;
@@ -90,7 +117,7 @@ appContainer.
             context.font = "10pt Helvetica";
             context.textAlign = "center";
             context.textBaseline = "middle";
-            context.fillText(currentHorizontalDivision * divisionInHours, currentX , size.bottom + 20);
+            context.fillText(currentHorizontalDivision * timeFormat.divisionsValue, currentX , size.bottom + 20);
           }
           ++currentHorizontalDivision;
         }
