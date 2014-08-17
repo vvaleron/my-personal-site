@@ -133,8 +133,8 @@ appContainer.
           points = canvas.chart.points;
 
       // Create mock points for dev
-      if (points && points.length < 10){
-        for (var i=0; i < 1000; i++){
+      if (points && points.length < 10) {
+        for (var i=0; i < 50; i++) {
          var point = {};
           point.date = "" + Math.round(Math.random() * 2014) + '-' + Math.round(Math.random() * 12) + '-' + Math.round(Math.random() * 30);    
           point.time = ""+ Math.round(Math.random() * 24) + ':'+ Math.round(Math.random() * 60);
