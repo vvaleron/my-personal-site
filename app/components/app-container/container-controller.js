@@ -1,8 +1,8 @@
 appContainer.
 controller('container-controller', ['$scope', function($scope) {
   		console.log("app-container-controller", this);
-  		$scope.game = [/*"Home", "About", */"Contacts", "Projects"];
-  }])
+  		$scope.topNavBar = [/*"Home", "About",*/ "Contacts", "Projects"];
+}])
 
   // appContainer.
   // directive('appContainer', [/*'version',*/ function(/*version*/) {
