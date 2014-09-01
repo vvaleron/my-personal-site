@@ -14,62 +14,68 @@ appContainer.
             bottom: canvas.height - canvas.getPercent(10).height,
             left: canvas.getPercent(10).width,
             right: canvas.width - canvas.getPercent(10).width,
-            verticalDivision: 30,
-            horizontalDivision: 30
+            verticalDivision: null,
+            horizontalDivision: null
           },
-          processTimeZone: function(){
-          var timeFormat;
+          processTimeFormat: function(){
             switch(this.timeZone) {
                 case "Day":
-                    timeFormat = {
+                    return {
                       format: 24,
                       divisionsValue: 2
                     };
                     break;
                 case "Week":
-                    timeFormat = {
+                    return {
                       format: 7,
                       divisionsValue: 1
                     };
                     break;
                 case "Month":
-                    timeFormat = {
+                    return {
                       format: 4,
                       divisionsValue: 1
                     };
                     break;
                 case "Year":
-                    timeFormat = {
+                    return {
                       format: 12,
                       divisionsValue: 1
                     };
                     break;
             };
-            return timeFormat;
+          },
+          getTimePxl: function(){
+            var size = canvas.chart.size,
+            width = size.width - size.left * 2,
+            time = canvas.chart.processTimeFormat();
+
+            return width / time.format;
+          },
+          getTempPxl: function(){
+            var size = canvas.chart.size,
+            height = size.height - size.top * 2;
+
+            return height / 50;    
           }      
       };
 
-      canvas.chart.getHourPxl = function() {
-        var size = canvas.chart.size,
-            width = size.width - size.left * 2;
-
-        return width/24;
-      };
-      canvas.chart.getTempPxl = function() {
-        var size = canvas.chart.size,
-            height = size.height - size.top * 2;
-
-        return height/50;
-      };
+      ////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////
+      //===================REFACTORING==================//
+      ////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////
       canvas.chart.getXPoint = function(hours, minutes) {
         var chart = canvas.chart,
             inHours = hours + minutes/60;
 
-            return inHours * chart.getHourPxl();
+            return inHours * chart.getTimePxl();
       };
       canvas.chart.getYPoint = function(temperature) {
           return temperature * canvas.chart.getTempPxl();
       };
+      /////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////
 
       canvas.repaintBackground();
   	};
@@ -87,7 +93,7 @@ appContainer.
   		var context = this.getContext('2d'),
   			size = this.chart.size,
         divisionInCelsius = 5,
-        timeFormat = this.chart.processTimeZone(),
+        timeFormat = this.chart.processTimeFormat(),
         horizontalDivisionsCount,
         horizontalDivisionInPixel,
         verticalDivisionsCount,
@@ -257,8 +263,6 @@ appContainer.
     	if(chart.points){
     		this.repaintPoints();
     	}
-
-    	
     };
 
   	function applyMethods(el){

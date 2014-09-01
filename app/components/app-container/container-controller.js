@@ -1,7 +1,7 @@
 appContainer.
 controller('container-controller', ['$scope', function($scope) {
   		console.log("app-container-controller", this);
-  		$scope.game = ["Home", "About", "Contacts", "Projects"];
+  		$scope.game = [/*"Home", "About", */"Contacts", "Projects"];
   }])
 
   // appContainer.
