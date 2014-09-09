@@ -189,9 +189,6 @@ appContainer.
                 case 'right':
                     utils.moveRight();
                     break;
-                // default :
-
-                //     console.log('default');
             };
         };
 
@@ -201,18 +198,30 @@ appContainer.
             utils.showNew();
             utils.move(side);
         });
+      
+      $(document).keydown(function(e){
+        var side;
+          
+          switch(e.keyCode) {
+            case 37: 
+              side = 'left';
+              break;
+            case 38:
+              side = 'up';
+              break;
+            case 39:
+              side = 'right';
+              break;
+            case 40:
+              side = 'down';
+              break;
+          }
+
+          if (side) {
+            utils.showNew();
+            utils.move(side);
+          }
+
+      });
+
     }])
-
-  // appContainer.
-  // directive('appContainer', [/*'version',*/ function(/*version*/) {
-	 //    return {
-	 //    	templateUrl:'components/app-container/appContainer.html'
-	 //    }
-  // }]);
-
-  // app.
-  //   filter('interpolate', ['version', function(version) {
-  //   return function(text) {
-  //     return String(text).replace(/\%VERSION\%/mg, version);
-  //   };
-  // }]);

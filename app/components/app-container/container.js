@@ -38,6 +38,10 @@ config(['$routeProvider', function($routeProvider) {
             controller: 'charts-controller'}
         );
 
+        $routeProvider.when('/projects/ngAnimate', {
+            templateUrl: 'components/projects/animate/animateContent.html', 
+            controller: 'animate-controller'}
+        );
     // otherwise({
     //     redirectTo: '/'
     //   });
