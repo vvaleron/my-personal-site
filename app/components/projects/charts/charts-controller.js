@@ -1,3 +1,4 @@
+(function(){
 appContainer.
   controller('charts-controller', ['$scope', '$filter', 'paintChart', function($scope, $filter, paintChart) {
     		console.log("charts-controller", this);
@@ -26,3 +27,4 @@ appContainer.
             canvas.repaint();
         });       
     }]);
+}());

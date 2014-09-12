@@ -1,7 +1,6 @@
 var appContainer = angular.module('container', [
   'ngRoute'
 ]).
-
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', { 
     	controller: 'container-controller'}
@@ -40,8 +39,8 @@ config(['$routeProvider', function($routeProvider) {
 
         $routeProvider.when('/projects/ngAnimate', {
             templateUrl: 'components/projects/animate/animateContent.html', 
-            controller: 'animate-controller'}
-        );
+            controller: 'animate-controller'
+        });
     // otherwise({
     //     redirectTo: '/'
     //   });

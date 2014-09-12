@@ -1,3 +1,4 @@
+(function(){
 appContainer.
   controller('blocks-controller', ['$scope', function($scope) {
     		console.log("blocks-controller", this);
@@ -225,3 +226,4 @@ appContainer.
       });
 
     }])
+}());

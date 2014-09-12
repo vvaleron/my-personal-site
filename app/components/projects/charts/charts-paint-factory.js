@@ -1,3 +1,4 @@
+(function(){
 appContainer.
   factory('paintChart', function(){
 
@@ -283,3 +284,4 @@ appContainer.
       repaintDivisions : repaintDivisions
     }
 });
+}());

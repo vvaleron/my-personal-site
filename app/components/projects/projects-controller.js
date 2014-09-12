@@ -1,3 +1,4 @@
+(function(){
 appContainer.
   controller('projects-controller', ['$scope','$routeParams', function($scope, $routeParams) {
     		console.log("projects-controller", this);
@@ -31,3 +32,4 @@ appContainer.
   //     return String(text).replace(/\%VERSION\%/mg, version);
   //   };
   // }]);
+}());
