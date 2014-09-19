@@ -1,9 +1,6 @@
 <div class="animate container"> 
 	<div class="categories btn-group-vertical" ng-init="initCaegories()">
-	  <button ng-click="category.onClick($event)" type="button" class="btn btn-default">Трансмісія</button>
-	  <div style="display: none;"></div>
-	  <button type="button" class="btn btn-default">Двигун</button>
-	  <button type="button" class="btn btn-default">Кузов</button>
-	  <button type="button" class="btn btn-default">Гальма</button>
+		<button ng-repeat="category in categories" slide-menu ng-click="categoryClick($event)" type="button" class="btn btn-default">{{category.name}}</button>
+    
 	</div>
 <div>

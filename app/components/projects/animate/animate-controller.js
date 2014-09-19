@@ -1,58 +1,88 @@
 (function(){
-appContainer.
-  service('AbstractCategory', function () {
-    return function (){
-
-        return {
-            current: null,
-            
-            setCurrent: function(target) {
-               this.current = target;
-            },
-            getCurrent: function() {
-               return this.current;
-            },
-            getChilds: function() {
-            },
-            getParent: function() {
-            },
-            onClick: function(event) {
-                var me = this;
-                me.setCurrent($(event.target));
-                me.slide();
-                me.click(event);
-            },
-            slide: function() {
-                console.log("slide", this);
-            }       
-        }  
-    }
-  });
 
 appContainer.
-  controller('animate-controller', ['$scope','AbstractCategory', function($scope, AbstractCategory) {
+  controller('animate-controller', ['$scope', function($scope) {
+ 	    	var processSubCategories = function(subCategories) {
+ 	    		
+ 	    	};
+
  	    	var initCaegories = function(){
-	    	    function Category() {
-	            	this.type = "category";
-	            	this.click = function(event) {
-	            		var btn = this.getCurrent();
-	            	};
-	            };
-				Category.prototype = AbstractCategory();
-	            
-	            function SubCategory() {
-	            	this.type = "subCategory";
-	            	this.click = function(event) {
-	            	};
-	            };
-				SubCategory.prototype = AbstractCategory();
+	    	    
+	    	    $scope.currentCategory = null;
+	    	    $scope.$watch('currentCategory', function() {
+	    	    	var fullObj = $scope.categories.filter(function(el){
+	    	    		return el.name == $scope.currentCategory;
+	    	    	})[0];
 
-				$scope.category = new Category;
-				$scope.subCategory = new SubCategory;         
+	    	    	if (!fullObj) {
+	    	    		return
+	    	    	}
+
+	    	    	processSubCategories(fullObj.childs);
+					console.log(fullObj);
+				});
+
+				$scope.categories = [
+					{
+						name: "Трансмісія",
+						childs: [
+							"Коробка",
+							"Мастило"
+						]
+					},
+					{
+						name: "Двигун",
+						childs: [
+							"Поршні",
+							"Кільця"
+						]
+					},
+					{
+						name: "Кузов",
+						childs: [
+							"Двері",
+							"Вікна",
+							"Ручки"
+						]
+					},
+					{
+						name: "Гальма",
+						childs: [
+							"Педалі",
+							"Мастило"
+						]
+					}
+				];
+
 	    	};
+	    $scope.categoryClick = function(e){
+	    	$scope.currentCategory = $(e.target).text();
+	    };
 
     	$scope.initCaegories = initCaegories();
 
     }]);
+
+
+appContainer.
+	directive('slideMenu', function () {
   
+  return {
+    restrict: 'EA',
+    link: function ($scope, $element, $attrs) {
+      $element.on('click', function(e){
+      if(!this.hasAttribute('sub')){
+      	var subCategoryDiv = document.createElement('div');
+	    $(subCategoryDiv).addClass('sub-category-div');
+	    $(subCategoryDiv).attr('style', 'padding:20px 10px; display: none;');
+	    $(this).attr('sub', 'true');
+	    $(this).after(subCategoryDiv);  	
+      }
+      $(this).next('div').slideToggle();
+      $(this).toggleClass('active');
+      });
+    }
+  };
+});
+
 }());
