@@ -93,8 +93,8 @@
 
 /*==============================================================*/
 /*          styles for "ngAnimate"                              */
-.animate {
-
+.animate .sub-category-div{
+    border: 1px solid gray;
 }
 /*          end of styles for "ngAnimate"                          */
 /*==============================================================*/
