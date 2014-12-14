@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> 
-<html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<html lang="en" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,63 +11,21 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css"/>
-  <link rel="stylesheet" href="resourses/css/app.css"/>
-
-  <script src="libs/jquery/dist/jquery.js"></script>
-  <script src="libs/angular/angular.js"></script>
-  <script src="libs/angular-route/angular-route.js"></script>
-  <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="resources/js/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="resources/css/app.css"/>
+<!--
+  <script src="resources/js/angular/angular.js"></script>
+  <script src="resources/js/angular-route/angular-route.js"></script>
+  <script src="resources/js/bootstrap/dist/js/bootstrap.js"></script>
+-->
 </head>
 <body>
 
+<div id="app" ng-app="app">
+  <div ng-view></div>
+</div>
 
-
-  <div app-container class="" ng-controller="container-controller as containerCtrl">
-      <div class="navigation" >
-        <nav class="navbar navbar-inverse" role="navigation">
-          <div class="container-fluid">
-
-            <div class="navbar-header">
-             <a class="navbar-brand" href="#">Valeriy Shkolniy</a>
-            </div>
-
-            <div class="collapse navbar-collapse">
-              <ul class="nav navbar-nav">
-                <li ng-repeat="item in topNavBar"><a ng-href="#/{{item.toLowerCase()}}">{{item}}</a></li>
-              </ul>
-           </div>
-         </div>
-       </nav>
-    </div>
-
-    <div ng-view class="container"></div>
-    
-  </div>
-
-
-
-
-
-
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular2.min.js"></script>
-  -->
-  <script src="app.js"></script>
-  <script src="components/app-container/container.js"></script>
-
-  <script src="components/app-container/container-controller.js"></script>
-  <script src="components/about/about-controller.js"></script>
-  <script src="components/contacts/contacts-controller.js"></script>
-  <script src="components/home/home-controller.js"></script>
-  
-  <script src="components/projects/projects-controller.js"></script>
-    <script src="components/projects/blocks/blocks-controller.js"></script>
-
-    <script src="components/projects/charts/charts-controller.js"></script>
-    <script src="components/projects/charts/charts-paint-factory.js"></script>
-
-    <script src="components/projects/animate/animate-controller.js"></script>
+<script src="resources/js/require/require.js" data-main="require-config.js"></script>
+<!-- <script src="app.js"></script> -->
 </body>
 </html>
