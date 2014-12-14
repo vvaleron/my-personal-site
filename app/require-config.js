@@ -2,7 +2,7 @@ require.config({
 
   // alias libraries paths
     paths: {
-        // 'domReady': '../lib/requirejs-domready/domReady',
+        'domReady': './resources/js/require/domReady',
         'angular': './resources/js/angular/angular',
         'authorization': './modules/authorization/authorization',
         'angularRoute': './resources/js/angular-route/angular-route'
@@ -23,4 +23,20 @@ require.config({
     'app',
     'app-controller'
     ]
+});
+
+/**
+ * bootstraps angular onto the window.document node
+ */
+define([
+    'require',
+    'angular'
+], 
+
+function (require, ng) {
+    'use strict';
+    window.name = "NG_DEFER_BOOTSTRAP!";
+    require(['domReady!'], function (document) {
+        ng.bootstrap(document, ['app']);
+    });
 });

@@ -4,8 +4,6 @@
 //   'authorization'
 // ]);
 
-window.name = "NG_DEFER_BOOTSTRAP!";
-
 define([
     'angular',
     'angularRoute',
@@ -20,30 +18,15 @@ function (ng, angularRoute, authorization) {
         'app.authorization'
     ]);
 
-    angular.element().ready(function() {
-        angular.resumeBootstrap(['app']);
-    });
+    // angular.element().ready(function() {
+    //     angular.resumeBootstrap(['app']);
+    // });
 
 	app.config(['$routeProvider', function($routeProvider) {
-	    $routeProvider.when('/login', {
+	    $routeProvider.when('/', {
 	    	templateUrl: 'templates/appContainer.html'
 	    	}
 	    );
-
-	    // $routeProvider.when('/registration', {
-	    //     templateUrl: 'components/login/registrationWindow.html', 
-	    //     controller: 'registration-controller'}
-	    // );
-
-	    // $routeProvider.when('/my-profile', {
-	    //     templateUrl: 'components/userProfile/userProfile.html',
-	    //     controller: 'user-profile-controller'}
-	    // );
-
-	    // $routeProvider.when('/details-grid', {
-	    //     templateUrl: 'components/detailsGrid/detailsGrid.html',
-	    //     controller: 'details-grid-controller'}
-	    // );
 	}]);
 
     app.run(["$rootScope", '$http', function ($rootScope, $http) {
